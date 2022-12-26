@@ -1,0 +1,13 @@
+- name: "Manage WEB container at worker1"
+  hosts: worker1
+  become: true
+  tasks:
+          - name: "Clone repo and package app"
+            local_action: 
+                 module: git
+                 repo: git://foosball.example.org/path/to/repo.git
+                 dest: /local/path
+          - apt:
+                  name: tomcat9
+                  update-cache: yes
+                  present: true
